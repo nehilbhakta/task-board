@@ -52,7 +52,7 @@ export default function HomePage() {
       </section>
       {error && <p className="error">{error}</p>}
 
-      <section className="create-panel">
+      <section className="create-panel" id="create-board">
         <h2>Create a board</h2>
         <form onSubmit={createBoard} className="form-stack">
           <label>

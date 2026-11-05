@@ -26,33 +26,73 @@ body {
 a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+/* Light sticky header — deliberately the opposite of HeartRisk's dark teal bar. */
 header.site {
-  background: var(--navy);
-  color: #fff;
-  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 6px rgba(15, 42, 68, 0.07);
+  padding: 0 24px;
 }
-header.site a { color: #fff; font-weight: 700; font-size: 1.25rem; }
+.site-bar {
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 .wordmark {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   letter-spacing: -0.01em;
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 1.2rem;
+  flex: none;
 }
 .wordmark:hover { text-decoration: none; }
-.wordmark-mark {
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 22px;
-}
-.wordmark-mark span {
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  flex: none;
   display: block;
-  width: 7px;
-  border-radius: 2px;
 }
-.wordmark-mark span:nth-child(1) { height: 22px; background: var(--blue); }
-.wordmark-mark span:nth-child(2) { height: 22px; background: var(--gold); }
-.wordmark-mark span:nth-child(3) { height: 22px; background: #fff; }
+.site-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-height: 40px;
+}
+.nav-pill:hover { text-decoration: none; background: #e0e7ff; }
+.nav-pill.active { background: #e0e7ff; box-shadow: inset 0 0 0 1px #c7d2fe; }
+.new-board-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+}
+.new-board-btn:hover { text-decoration: none; filter: brightness(1.08); }
 
 .hero { margin-bottom: 28px; }
 .hero h1 { font-size: 2rem; letter-spacing: -0.02em; }
@@ -65,6 +105,7 @@ header.site a { color: #fff; font-weight: 700; font-size: 1.25rem; }
   max-width: 560px;
   margin-bottom: 32px;
   box-shadow: 0 1px 3px rgba(15, 42, 68, 0.08);
+  scroll-margin-top: 84px;
 }
 .create-panel h2 { margin: 0 0 12px; font-size: 1.15rem; }
 
@@ -193,4 +234,8 @@ input[type="date"] { min-height: 48px; }
   main { padding: 16px; }
   .columns { flex-direction: column; }
   .column { min-width: 100%; }
+  header.site { padding: 0 16px; }
+  .site-nav { display: none; }
+  .site-bar { justify-content: space-between; }
+  .new-board-btn { padding: 10px 14px; }
 }
