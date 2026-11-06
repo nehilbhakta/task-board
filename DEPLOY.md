@@ -34,15 +34,18 @@ Environment variables on the service:
   `https://taskboard-api.onrender.com`. Check
   `https://taskboard-api.onrender.com/api/health` returns `{"status":"ok"}`.
 
-**Seed the demo board (one time, in the Render dashboard):**
-Shell tab of the service → run `python -m app.seed` (working directory is
-`backend/`). The seed is idempotent — it skips if a board already exists.
+**Seeding is automatic — no Shell step needed:**
+The backend seeds the demo board on startup whenever the database is empty
+(see the `lifespan` hook in `backend/app/main.py`). This is deliberate:
+Render's free Shell is a paid feature, so `python -m app.seed` cannot be run
+from the dashboard. The seed is idempotent — it skips if a board already
+exists — so local runs are unaffected.
 
 > SQLite on Render's free tier lives on an ephemeral disk: **data resets on
-> every redeploy/restart**. The demo board can be re-seeded with the command
-> above; user-created boards are not preserved. For persistent data, attach a
-> Render Postgres database and set `DATABASE_URL` to its connection string
-> (no code change needed — `DATABASE_URL` is already read from the
+> every redeploy/restart**. The demo board is re-seeded automatically on the
+> next startup; user-created boards are not preserved. For persistent data,
+> attach a Render Postgres database and set `DATABASE_URL` to its connection
+> string (no code change needed — `DATABASE_URL` is already read from the
 > environment).
 
 ## 2. Frontend on Vercel
