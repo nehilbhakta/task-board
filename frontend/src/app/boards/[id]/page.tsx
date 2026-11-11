@@ -20,8 +20,10 @@ export default function BoardPage({ params }: { params: Promise<{ id: string }> 
 
   // Compare calendar dates only, in local time: parsing "YYYY-MM-DD" with
   // parts avoids the UTC-midnight shift that new Date("2026-11-04") causes.
-  function dueStatus(dueDate: string | null): "overdue" | "today" | "" {
-    if (!dueDate) return "";
+  // Cards in the Done list are finished, so they are never "overdue" or
+  // "due today" no matter what their due date says.
+  function dueStatus(dueDate: string | null, done: boolean): "overdue" | "today" | "" {
+    if (!dueDate || done) return "";
     const [year, month, day] = dueDate.split("-").map(Number);
     const due = new Date(year, month - 1, day);
     const today = new Date();
@@ -31,8 +33,8 @@ export default function BoardPage({ params }: { params: Promise<{ id: string }> 
     return "";
   }
 
-  function dueLabel(card: Card): string {
-    const status = dueStatus(card.due_date);
+  function dueLabel(card: Card, done: boolean): string {
+    const status = dueStatus(card.due_date, done);
     if (status === "overdue") return `Overdue · Due ${formatDate(card.due_date)}`;
     if (status === "today") return `Due today · ${formatDate(card.due_date)}`;
     return `Due ${formatDate(card.due_date)}`;
@@ -131,6 +133,7 @@ export default function BoardPage({ params }: { params: Promise<{ id: string }> 
       <div className="columns">
         {board.lists.map((list) => {
           const visible = list.cards.filter(matches);
+          const isDoneList = list.title.trim().toLowerCase() === "done";
           return (
             <section
               key={list.id}
@@ -193,7 +196,7 @@ export default function BoardPage({ params }: { params: Promise<{ id: string }> 
                         {label}
                       </span>
                     ))}
-                    {card.due_date && <span className={`due ${dueStatus(card.due_date)}`}>{dueLabel(card)}</span>}
+                    {card.due_date && <span className={`due ${dueStatus(card.due_date, isDoneList)}`}>{dueLabel(card, isDoneList)}</span>}
                   </div>
                 </article>
               ))}
