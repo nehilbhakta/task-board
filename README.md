@@ -1,5 +1,7 @@
 # TaskBoard
 
+**Live app: https://nehilbhakta-taskboard.vercel.app**
+
 A full-stack, Trello-style task board. I built it to practise owning both sides of a
 real product: a FastAPI backend with a proper data model, and a Next.js frontend that
 talks to it — drag-and-drop, filtering, and editing included, with no heavy UI library
@@ -106,6 +108,6 @@ python -m pytest -q
 | GET / PATCH / DELETE | `/api/cards/{id}` | Get / update / delete a card |
 | POST | `/api/cards/{id}/move` | Move a card to another list and position (`{list_id, position}`) |
 
-## Screenshots
+## Live demo
 
-To add after first run — board view and card dialog screenshots will go here.
+The app is deployed and seeded with the "Product Launch" demo board: https://nehilbhakta-taskboard.vercel.app
