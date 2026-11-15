@@ -2,6 +2,8 @@
 
 **Live app: https://nehilbhakta-taskboard.vercel.app**
 
+![TaskBoard demo — dragging a card from Backlog to In Progress](taskboard-demo.gif)
+
 A full-stack, Trello-style task board. I built it to practise owning both sides of a
 real product: a FastAPI backend with a proper data model, and a Next.js frontend that
 talks to it — drag-and-drop, filtering, and editing included, with no heavy UI library
